@@ -1,0 +1,30 @@
+<html>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+      function getParams() {
+        const query = location.search.substr(1);
+        const params = {};
+        query.split("&").forEach(function (item) {
+          const s = item.split("=")
+          const k = decodeURIComponent(s[0])
+          const v = decodeURIComponent(s[1])
+          params[k] = v
+        })
+        return params
+      }
+      function info() {
+        const obj = getParams()
+        $.post('http://localhost:3000/info',obj).done(data => {
+          const mail = data.info.email
+          const id = data.info.id
+          document.getElementById('info').innerText = `id=${id},mail=${mail}`
+           
+        })
+      }
+    </script>
+    <input type="button" value="ログイン情報" onclick="info()">
+    <div id="info"></div>
+  </body>
+</html>

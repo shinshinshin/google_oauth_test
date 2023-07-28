@@ -1,0 +1,17 @@
+<html>
+  <body>
+      <script src="https://accounts.google.com/gsi/client" async defer></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script>
+        function login() {
+          $.post('http://localhost:3000/login')
+          .done(data => {
+            console.log(data)
+            window.location.href = data.authorizationUrl
+          })
+        }
+    </script>
+    <div id="buttonDiv"></div> 
+    <input type="button" value="ログイン" onclick="login()">
+  </body>
+</html>
